@@ -1,8 +1,27 @@
 module.exports = {
-  root: true,
-  extends: '@react-native-community',
+  env: {
+    es6: true,
+  },
+  extends: ['plugin:react/recommended', 'airbnb'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react-hooks'],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+  },
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'react-hooks',
+    'prettier',
+    'jsx-a11y',
+    'import',
+  ],
   rules: {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
