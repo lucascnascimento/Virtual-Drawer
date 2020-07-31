@@ -2,7 +2,7 @@ module.exports = {
   env: {
     es6: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -18,13 +18,18 @@ module.exports = {
     'react',
     '@typescript-eslint',
     'react-hooks',
-    'prettier',
     'jsx-a11y',
     'import',
+    'prettier',
   ],
   rules: {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.tsx'] },
+    ],
+    'react/jsx-one-expression-per-line': 'off',
   },
   settings: {
     'import/resolver': {
