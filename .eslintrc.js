@@ -42,6 +42,8 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'import/extensions': [0, 'never'],
     'import/no-unresolved': 0,
+    'no-plusplus': 0,
+    'import/no-extraneous-dependencies': 0,
   },
   settings: {
     'import/resolver': {
