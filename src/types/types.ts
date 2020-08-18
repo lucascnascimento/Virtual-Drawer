@@ -11,3 +11,7 @@ export interface Item {
 export interface TablesList {
   tables: string[];
 }
+
+export interface TableName {
+  name: string;
+}
