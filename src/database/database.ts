@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 import { Alert } from 'react-native';
 import {
@@ -22,6 +24,18 @@ const db: SQLiteDatabase = openDatabase(
 );
 
 class Database {
+  private static instance: Database;
+
+  private constructor() {}
+
+  static getInstance(): Database {
+    if (!Database.instance) {
+      Database.instance = new Database();
+    }
+
+    return Database.instance;
+  }
+
   private handleSucess(
     transaction: Transaction,
     resultSet: ResultSet,
@@ -31,6 +45,28 @@ class Database {
 
   private handleError(transaction: Transaction, error: SQLError): void {
     Alert.alert(`Erro: ${error.code}`, `Erro: ${error.message}`);
+  }
+
+  /**
+   * Executes an sql query on the database
+   * @param sql SQL query to be executed
+   * @param params SQL query parameters
+   */
+  private executeQuery(sql: string, params = []): Promise<ResultSet> {
+    return new Promise((resolve, reject) => {
+      db.transaction((trans) => {
+        trans.executeSql(
+          sql,
+          params,
+          (trans, results) => {
+            resolve(results);
+          },
+          (error) => {
+            reject(error);
+          },
+        );
+      });
+    });
   }
 
   /**
@@ -70,18 +106,16 @@ class Database {
   /**
    * Index all tables
    */
-  indexTables(): void {
-    db.executeSql(
+  indexTables(): Promise<ResultSet> {
+    return this.executeQuery(
       `SELECT
-      name
-  FROM
-      sqlite_master
-  WHERE
-      type ='table' AND
-      name NOT LIKE 'sqlite_%'`,
+    name
+FROM
+    sqlite_master
+WHERE
+    type ='table' AND
+    name NOT LIKE 'sqlite_%'`,
       [],
-      this.handleSucess,
-      this.handleError,
     );
   }
 
