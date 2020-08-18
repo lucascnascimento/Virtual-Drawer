@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Modal, Alert, Text, StyleSheet, TextInput } from 'react-native';
 import translate from '~/translations';
+import db from '~/database/db';
 
 import {
   Container,
@@ -39,9 +40,20 @@ const InputModal = ({ visible, setModalVisible }: InputModalProps) => {
     }
   }
 
-  function handleSubmit() {
-    // Chama a action que cria o db
-    console.log('peido');
+  /**
+   * Create a database table
+   */
+  async function handleSubmit() {
+    try {
+      const res = await db.createTable(inputText);
+      const { rows } = res;
+      for (let i = 0; i < rows.length; i++) {
+        const item = rows.item(i);
+      }
+      setModalVisible(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -76,7 +88,7 @@ const InputModal = ({ visible, setModalVisible }: InputModalProps) => {
             </Button>
             <Button
               onPress={handleSubmit}
-              disabled={!inputError}
+              disabled={inputError}
               style={inputError && { opacity: 0.5 }}>
               <Text>{translate('create')}</Text>
             </Button>
@@ -100,5 +112,3 @@ const styles = StyleSheet.create({
 });
 
 export default InputModal;
-
-// todo: validar se as tabelas não tem o mesmo nome
