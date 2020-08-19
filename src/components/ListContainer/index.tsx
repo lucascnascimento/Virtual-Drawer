@@ -2,7 +2,9 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-// import { Container } from './styles';
+import { Separator } from './styles';
+
+import ListItem from '~/components/ListItem';
 
 import { TableName } from '~/types/types';
 
@@ -14,7 +16,8 @@ const ListContainer = ({ tables }: ListContainerProps): JSX.Element => {
       <FlatList
         data={tables}
         keyExtractor={(table) => table.name}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
+        renderItem={({ item }) => <ListItem item={item} />}
+        ItemSeparatorComponent={() => <Separator />}
       />
     </View>
   );
