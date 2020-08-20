@@ -11,16 +11,16 @@ import { Container, Icon, Body, BodyTitle, TrashButton } from './styles';
 
 type ListItemProps = {
   item: TableName;
-  deleteItem: (name: string) => Promise<void>;
+  openConfirmationModal: (name: string) => void;
 };
 
 const ListItem: React.FC<ListItemProps> = ({
   item,
-  deleteItem,
+  openConfirmationModal,
 }: ListItemProps) => {
   function renderRightAction() {
     return (
-      <TrashButton onPress={() => deleteItem(item.name)}>
+      <TrashButton onPress={() => openConfirmationModal(item.name)}>
         <SLIcon name="trash" size={24} color="#fff" />
       </TrashButton>
     );
