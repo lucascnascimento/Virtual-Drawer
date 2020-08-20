@@ -21,7 +21,7 @@ interface MessageModalProps {
   cancelAction(): void;
 }
 
-const MessageModal: React.FC = ({
+const MessageModal: React.FC<MessageModalProps> = ({
   visible,
   title,
   message,
