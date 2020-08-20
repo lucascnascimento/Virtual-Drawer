@@ -1,23 +1,28 @@
 export default {
   drawers: 'Gavetas',
-  'enter the drawer name': 'Dê um nome para a gaveta',
+  enterDrawerName: 'Dê um nome para a gaveta',
   cancel: 'Cancelar',
   create: 'Criar',
-  'drawer name placeholder': 'Nome da gaveta',
-  'search for an item': 'Procurar por um item',
+  drawerNamePlacholder: 'Nome da gaveta',
+  searchForAnItem: 'Procurar por um item',
   name: 'Nome',
   description: 'Descrição',
   location: 'Local',
   createdAt: 'Criado em',
   updateAt: 'Modificado em',
-  'save changes question': 'Gostaria de salvar as alterações?',
-  'save item body':
+  saveChangesQuestion: 'Gostaria de salvar as alterações?',
+  saveItemBody:
     'Ao clicar em salvar, um novo item será adicionado a sua gaveta',
-  'save drawer body': 'Ao clicar em salvar, uma nova gaveta será criada',
-  'dont show this message again': 'Não mostrar esta mensagem novamente',
-  'attention item body':
+  saveDrawerBody: 'Ao clicar em salvar, uma nova gaveta será criada',
+  dontShowThisMessageAgain: 'Não mostrar esta mensagem novamente',
+  attentionItemBody:
     'Atenção! Items alterados não poderão ser revertidos, tem certeza que quer modificá-los?',
-  'new item': 'Novo item',
-  'no description': 'Sem descrição',
+  newItem: 'Novo item',
+  noDescription: 'Sem descrição',
   add: 'adicionar',
+  drawerDeleted: 'Gaveta apagada',
+  drawerCreated: 'Gaveta criada',
+  itemDeleted: 'Item apagado',
+  itemCreated: 'Item criado',
+  ready: 'Pronto',
 };

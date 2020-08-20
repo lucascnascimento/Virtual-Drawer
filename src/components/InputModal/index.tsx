@@ -67,7 +67,7 @@ const InputModal = ({ visible, setModalVisible }: InputModalProps) => {
       <Container>
         <ModalView style={styles.boxShadow}>
           <Header>
-            <Title>{translate('enter the drawer name')}</Title>
+            <Title>{translate('enterDrawerName')}</Title>
           </Header>
           <Body>
             <Input
