@@ -14,7 +14,10 @@ type ListItemProps = {
   deleteItem: (name: string) => Promise<void>;
 };
 
-const ListItem: React.FC = ({ item, deleteItem }: ListItemProps) => {
+const ListItem: React.FC<ListItemProps> = ({
+  item,
+  deleteItem,
+}: ListItemProps) => {
   function renderRightAction() {
     return (
       <TrashButton onPress={() => deleteItem(item.name)}>
