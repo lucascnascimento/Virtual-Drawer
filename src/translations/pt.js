@@ -25,4 +25,9 @@ export default {
   itemDeleted: 'Item apagado',
   itemCreated: 'Item criado',
   ready: 'Pronto',
+  ok: 'Ok',
+  deleteItemBody:
+    'Tem certeza que deseja deletar este item? Itens deletados não podem ser recuperados!',
+  yes: 'Sim',
+  attention: 'Atenção!',
 };

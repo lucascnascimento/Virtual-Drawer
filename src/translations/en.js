@@ -24,4 +24,9 @@ export default {
   itemDeleted: 'Item deleted',
   itemCreated: 'Item created',
   ready: 'Ready',
+  ok: 'Ok',
+  deleteItemBody:
+    'Are you sure you want to delete this item? Deleted items cannot be recovered!',
+  yes: 'Yes',
+  attention: 'Attention!',
 };
