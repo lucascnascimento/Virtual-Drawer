@@ -5,6 +5,9 @@ import {
   SQLiteDatabase,
 } from 'react-native-sqlite-storage';
 
+/**
+ * Opens the connection to the database
+ */
 const db: SQLiteDatabase = openDatabase(
   { name: 'database.db', location: 'default' },
   () => {
@@ -53,6 +56,10 @@ WHERE
   );
 }
 
+/**
+ * Creates a new table in the database
+ * @param name Table name
+ */
 function createTable(name: string): Promise<ResultSet> {
   return executeQuery(
     `CREATE TABLE IF NOT EXISTS ${name} (
@@ -67,4 +74,12 @@ function createTable(name: string): Promise<ResultSet> {
     [],
   );
 }
-export default { indexTables, createTable };
+
+/**
+ * Drop the table if exists
+ * @param name Table name
+ */
+function dropTable(name: string): Promise<ResultSet> {
+  return executeQuery(`DROP TABLE IF EXISTS ${name}`, []);
+}
+export default { indexTables, createTable, dropTable };
