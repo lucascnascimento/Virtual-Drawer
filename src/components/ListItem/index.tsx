@@ -9,21 +9,15 @@ import { TableName } from '~/types/types';
 
 import { Container, Icon, Body, BodyTitle, TrashButton } from './styles';
 
-type ListItemProps = { item: TableName };
+type ListItemProps = {
+  item: TableName;
+  deleteItem: (name: string) => Promise<void>;
+};
 
-const ListItem: React.FC = ({ item }: ListItemProps) => {
-  async function handleDelete() {
-    try {
-      const res = await db.dropTable(item.name);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+const ListItem: React.FC = ({ item, deleteItem }: ListItemProps) => {
   function renderRightAction() {
     return (
-      <TrashButton onPress={handleDelete}>
+      <TrashButton onPress={() => deleteItem(item.name)}>
         <SLIcon name="trash" size={24} color="#fff" />
       </TrashButton>
     );
