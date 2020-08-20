@@ -27,7 +27,7 @@ export default {
   ready: 'Pronto',
   ok: 'OK',
   deleteItemBody:
-    'Tem certeza que deseja deletar este item? Itens deletados não podem ser recuperados!',
+    'Tem certeza que deseja deletar este item? Itens deletados não poderão ser recuperados!',
   yes: 'SIM',
   attention: 'Atenção!',
 };
