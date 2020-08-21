@@ -46,12 +46,12 @@ function executeQuery(sql: string, params = []): Promise<ResultSet> {
 function indexTables(): Promise<ResultSet> {
   return executeQuery(
     `SELECT
-    name
-FROM
-    sqlite_master
-WHERE
-    type ='table' AND
-    name NOT LIKE 'sqlite_%'`,
+        name
+    FROM
+        sqlite_master
+    WHERE
+        type ='table' AND
+        name NOT LIKE 'sqlite_%'`,
     [],
   );
 }
@@ -82,4 +82,22 @@ function createTable(name: string): Promise<ResultSet> {
 function dropTable(name: string): Promise<ResultSet> {
   return executeQuery(`DROP TABLE IF EXISTS ${name}`, []);
 }
-export default { indexTables, createTable, dropTable };
+
+/**
+ * Search for an input pattern on database names
+ * @param searchField Pattern to be searched
+ */
+function selectTable(searchField: string): Promise<ResultSet> {
+  return executeQuery(
+    `SELECT
+      name
+    FROM
+      sqlite_master
+    WHERE
+      type ='table' AND
+      name NOT LIKE 'sqlite_%' AND
+      name LIKE '%${searchField}%';`,
+    [],
+  );
+}
+export default { indexTables, createTable, dropTable, selectTable };
