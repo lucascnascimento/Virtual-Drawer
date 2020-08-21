@@ -15,3 +15,8 @@ export interface TablesList {
 export interface TableName {
   name: string;
 }
+
+export type RootStackParamList = {
+  Home: undefined;
+  Search: undefined;
+};
