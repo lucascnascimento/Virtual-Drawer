@@ -5,4 +5,5 @@ export const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   margin: 0 20px;
+  flex: 1;
 `;
