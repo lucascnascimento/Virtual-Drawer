@@ -51,6 +51,7 @@ function indexTables(): Promise<ResultSet> {
         sqlite_master
     WHERE
         type ='table' AND
+        name NOT LIKE 'android_metadata' AND
         name NOT LIKE 'sqlite_%'`,
     [],
   );
@@ -96,6 +97,7 @@ function selectTable(searchField: string): Promise<ResultSet> {
     WHERE
       type ='table' AND
       name NOT LIKE 'sqlite_%' AND
+      name NOT LIKE 'android_metadata' AND
       name LIKE '%${searchField}%';`,
     [],
   );
