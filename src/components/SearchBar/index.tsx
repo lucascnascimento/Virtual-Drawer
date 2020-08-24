@@ -12,7 +12,7 @@ type SearchBarProps = {
 
 /**
  * Search Bar component
- * @param setSearchField Function to set the input text value to the parent state
+ * @param setSearchField Function to send the TextInput value to the parent's state
  */
 const SearchBar: React.FC<SearchBarProps> = ({
   setSearchField,
@@ -36,6 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         value={value}
         onChangeText={(text) => setValue(text)}
         placeholder={translate('searchForAnItem')}
+        autoFocus
       />
 
       {!value && (
