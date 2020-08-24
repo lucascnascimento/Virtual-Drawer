@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TextInput } from 'react-native';
 import SLIIcon from 'react-native-vector-icons/SimpleLineIcons';
+import debounce from 'lodash.debounce';
 import translate from '~/translations';
 
 import { Container } from './styles';
@@ -18,9 +19,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }: SearchBarProps) => {
   const [value, setValue] = useState('');
 
+  const handler = useCallback(
+    debounce(() => {
+      setSearchField(value);
+    }, 250),
+    [value],
+  );
+
   useEffect(() => {
-    setSearchField(value);
-  }, [setSearchField, value]);
+    handler();
+  }, [handler, value]);
 
   return (
     <Container>
