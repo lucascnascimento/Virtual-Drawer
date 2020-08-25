@@ -6,13 +6,16 @@ import SLIIcons from 'react-native-vector-icons/SimpleLineIcons';
 import translate from '~/translations';
 
 import Home from '~/screens/Home';
+import SearchTable from '~/screens/SearchTable';
+
 import SearchAndAddIcons from '~/components/SearchAndAddIcons';
 
 import { configStore } from '~/store';
+import { RootStackParamList } from './types/types';
 
 const { store } = configStore();
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
@@ -22,12 +25,24 @@ const App = () => {
           <Stack.Screen
             name="Home"
             component={Home}
-            options={{
+            options={({ navigation, route }) => ({
               title: translate('drawers'),
-              headerRight: () => <SearchAndAddIcons />,
+              headerRight: () => <SearchAndAddIcons navigation={navigation} />,
               headerLeft: () => (
-                <SLIIcons name="settings" color="#000" size={24} />
+                <SLIIcons
+                  name="settings"
+                  color="#000"
+                  size={24}
+                  style={{ paddingLeft: 20 }}
+                />
               ),
+            })}
+          />
+          <Stack.Screen
+            name="SearchTable"
+            component={SearchTable}
+            options={{
+              headerShown: false,
             }}
           />
         </Stack.Navigator>
