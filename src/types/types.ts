@@ -18,5 +18,5 @@ export interface TableName {
 
 export type RootStackParamList = {
   Home: undefined;
-  Search: undefined;
+  SearchTable: undefined;
 };
