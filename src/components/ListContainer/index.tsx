@@ -13,13 +13,15 @@ import { TableName } from '~/types/types';
 import Toast from '../Toast';
 
 type ListContainerProps = {
-  getListItems: () => Promise<ResultSet>;
-  deleteItem: (name: string) => Promise<ResultSet>;
+  getListItems: (searchParam?: string) => Promise<ResultSet>;
+  deleteItem?: (name: string) => Promise<ResultSet>;
+  searchParam?: string;
 };
 
 const ListContainer = ({
   getListItems,
   deleteItem,
+  searchParam,
 }: ListContainerProps): JSX.Element => {
   const [list, setList] = useState<Array<TableName>>([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,17 +30,19 @@ const ListContainer = ({
 
   useEffect(() => {
     async function getList() {
-      const res = await getListItems();
+      const res = searchParam
+        ? await getListItems(searchParam)
+        : await getListItems();
       const { rows } = res;
       const itemArray: TableName[] = [];
-      for (let i = 1; i < rows.length; i++) {
+      for (let i = 0; i < rows.length; i++) {
         itemArray.push(rows.item(i));
       }
       setList(itemArray);
     }
 
     getList();
-  }, [getListItems]);
+  }, [getListItems, searchParam]);
 
   useEffect(() => {
     setVisibleToast(false);
