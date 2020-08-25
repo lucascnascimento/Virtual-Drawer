@@ -4,9 +4,9 @@ import MIIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import InputModal from '~/components/InputModal';
 
-import { Container, Button } from './styles';
+import { Container, SearchButton, AddButton } from './styles';
 
-const SearchAndAddIcons: React.FC = () => {
+const SearchAndAddIcons: React.FC = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -18,12 +18,18 @@ const SearchAndAddIcons: React.FC = () => {
             setModalVisible={setModalVisible}
           />
         )}
-        <Button>
-          <SLIIcon name="magnifier" size={24} color="#000" />
-        </Button>
-        <Button onPress={() => setModalVisible(true)}>
+        <SearchButton>
+          <SLIIcon
+            onPress={() => navigation.navigate('SearchTable')}
+            name="magnifier"
+            size={24}
+            color="#000"
+          />
+        </SearchButton>
+
+        <AddButton onPress={() => setModalVisible(true)}>
           <MIIcons name="plus" size={32} color="#000" />
-        </Button>
+        </AddButton>
       </Container>
     </>
   );
