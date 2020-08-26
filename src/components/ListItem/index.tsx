@@ -3,7 +3,6 @@ import { Alert, Animated, Text, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import MCIIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SLIcon from 'react-native-vector-icons/SimpleLineIcons';
-import db from '~/database/db';
 
 import { TableName } from '~/types/types';
 

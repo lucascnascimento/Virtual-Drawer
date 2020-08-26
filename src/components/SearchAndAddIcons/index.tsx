@@ -7,17 +7,9 @@ import InputModal from '~/components/InputModal';
 import { Container, SearchButton, AddButton } from './styles';
 
 const SearchAndAddIcons: React.FC = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-
   return (
     <>
       <Container>
-        {modalVisible && (
-          <InputModal
-            visible={modalVisible}
-            setModalVisible={setModalVisible}
-          />
-        )}
         <SearchButton>
           <SLIIcon
             onPress={() => navigation.navigate('SearchTable')}
@@ -27,7 +19,7 @@ const SearchAndAddIcons: React.FC = ({ navigation }) => {
           />
         </SearchButton>
 
-        <AddButton onPress={() => setModalVisible(true)}>
+        <AddButton onPress={() => navigation.navigate('InputModal')}>
           <MIIcons name="plus" size={32} color="#000" />
         </AddButton>
       </Container>

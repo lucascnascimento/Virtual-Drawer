@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { ResultSet } from 'react-native-sqlite-storage';
 import translate from '~/translations';
@@ -14,7 +14,7 @@ import Toast from '../Toast';
 
 type ListContainerProps = {
   getListItems: (searchParam?: string) => Promise<ResultSet>;
-  deleteItem?: (name: string) => Promise<ResultSet>;
+  deleteItem: (name: string) => Promise<ResultSet>;
   searchParam?: string;
 };
 
@@ -27,9 +27,11 @@ const ListContainer = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [itemToBeDeleted, setItemToBeDeleted] = useState('');
   const [visibleToast, setVisibleToast] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getList() {
+      setLoading(true);
       const res = searchParam
         ? await getListItems(searchParam)
         : await getListItems();
@@ -39,6 +41,7 @@ const ListContainer = ({
         itemArray.push(rows.item(i));
       }
       setList(itemArray);
+      setLoading(false);
     }
 
     getList();
@@ -79,14 +82,18 @@ const ListContainer = ({
 
   return (
     <View testID="ListContainer">
-      <FlatList
-        data={list}
-        keyExtractor={(listItem) => listItem.name}
-        renderItem={({ item }) => (
-          <ListItem item={item} openConfirmationModal={openModal} />
-        )}
-        ItemSeparatorComponent={() => <Separator />}
-      />
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : (
+        <FlatList
+          data={list}
+          keyExtractor={(listItem) => listItem.name}
+          renderItem={({ item }) => (
+            <ListItem item={item} openConfirmationModal={openModal} />
+          )}
+          ItemSeparatorComponent={() => <Separator />}
+        />
+      )}
       <MessageModal
         visible={modalVisible}
         title={translate('attention')}

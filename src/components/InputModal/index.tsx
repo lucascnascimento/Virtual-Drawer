@@ -14,12 +14,7 @@ import {
   ModalView,
 } from './styles';
 
-interface InputModalProps {
-  visible: boolean;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const InputModal = ({ visible, setModalVisible }: InputModalProps) => {
+const InputModal = ({ navigation }) => {
   const [inputText, setInputText] = useState('');
   const [inputError, setInputError] = useState(false);
 
@@ -50,7 +45,7 @@ const InputModal = ({ visible, setModalVisible }: InputModalProps) => {
       for (let i = 0; i < rows.length; i++) {
         const item = rows.item(i);
       }
-      setModalVisible(false);
+      navigation.goBack();
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +55,7 @@ const InputModal = ({ visible, setModalVisible }: InputModalProps) => {
     <Modal
       animationType="fade"
       transparent
-      visible={visible}
+      visible
       onRequestClose={() => {
         Alert.alert('Modal has been closed.');
       }}>
@@ -82,7 +77,7 @@ const InputModal = ({ visible, setModalVisible }: InputModalProps) => {
           <Footer>
             <Button
               onPress={() => {
-                setModalVisible(false);
+                navigation.goBack();
               }}>
               <Text>{translate('cancel')}</Text>
             </Button>

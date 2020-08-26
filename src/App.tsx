@@ -7,45 +7,82 @@ import translate from '~/translations';
 
 import Home from '~/screens/Home';
 import SearchTable from '~/screens/SearchTable';
+import InputModal from '~/components/InputModal';
+import MessageModal from './components/MessageModal';
 
 import SearchAndAddIcons from '~/components/SearchAndAddIcons';
 
 import { configStore } from '~/store';
-import { RootStackParamList } from './types/types';
 
 const { store } = configStore();
 
-const Stack = createStackNavigator<RootStackParamList>();
+const MainStack = createStackNavigator();
+const RootStack = createStackNavigator();
+
+function MainStackScreen() {
+  return (
+    <MainStack.Navigator>
+      <MainStack.Screen
+        name="Home"
+        component={Home}
+        options={({ navigation, route }) => ({
+          title: translate('drawers'),
+          headerRight: () => <SearchAndAddIcons navigation={navigation} />,
+          headerLeft: () => (
+            <SLIIcons
+              name="settings"
+              color="#000"
+              size={24}
+              style={{ paddingLeft: 20 }}
+            />
+          ),
+        })}
+      />
+      <MainStack.Screen
+        name="SearchTable"
+        component={SearchTable}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </MainStack.Navigator>
+  );
+}
 
 const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={({ navigation, route }) => ({
-              title: translate('drawers'),
-              headerRight: () => <SearchAndAddIcons navigation={navigation} />,
-              headerLeft: () => (
-                <SLIIcons
-                  name="settings"
-                  color="#000"
-                  size={24}
-                  style={{ paddingLeft: 20 }}
-                />
-              ),
-            })}
+        <RootStack.Navigator
+          screenOptions={{
+            headerShown: false,
+            cardStyle: { backgroundColor: 'transparent' },
+            cardOverlayEnabled: true,
+            cardStyleInterpolator: ({ current: { progress } }) => ({
+              cardStyle: {
+                opacity: progress.interpolate({
+                  inputRange: [0, 0.5, 0.9, 1],
+                  outputRange: [0, 0.25, 0.7, 1],
+                }),
+              },
+              overlayStyle: {
+                opacity: progress.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 0.5],
+                  extrapolate: 'clamp',
+                }),
+              },
+            }),
+          }}
+          mode="modal">
+          <RootStack.Screen
+            name="Main"
+            component={MainStackScreen}
+            options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="SearchTable"
-            component={SearchTable}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
+          <RootStack.Screen name="InputModal" component={InputModal} />
+          <RootStack.Screen name="MessageModal" component={MessageModal} />
+        </RootStack.Navigator>
       </NavigationContainer>
     </Provider>
   );
