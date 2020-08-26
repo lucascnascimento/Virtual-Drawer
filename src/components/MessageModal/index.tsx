@@ -12,40 +12,43 @@ import {
 } from './styles';
 
 interface MessageModalProps {
-  visible: boolean;
   title: string;
   message: string;
   confirmText: string;
   cancelText: string;
-  confirmAction(): void;
-  cancelAction(): void;
 }
 
 const MessageModal: React.FC<MessageModalProps> = ({
-  visible,
-  title,
-  message,
-  confirmText,
-  confirmAction,
-  cancelText,
-  cancelAction,
+  navigation,
+  route,
 }: MessageModalProps) => {
   return (
-    <Modal animationType="fade" transparent visible={visible}>
+    <Modal animationType="fade" transparent visible>
       <Container>
         <ModalView style={styles.boxShadow}>
           <Header>
-            <Title>{title}</Title>
+            <Title>{route.params.title}</Title>
           </Header>
           <Body>
-            <Text>{message}</Text>
+            <Text>{route.params.message}</Text>
           </Body>
           <Footer>
-            <Button onPress={cancelAction}>
-              <Text>{cancelText}</Text>
+            <Button
+              onPress={() =>
+                navigation.navigate(route.params.parentScreen, {
+                  render: false,
+                })
+              }>
+              <Text>{route.params.cancelText}</Text>
             </Button>
-            <Button onPress={confirmAction}>
-              <Text>{confirmText}</Text>
+            <Button
+              onPress={() =>
+                navigation.navigate(route.params.parentScreen, {
+                  render: true,
+                  item: route.params.item,
+                })
+              }>
+              <Text>{route.params.confirmText}</Text>
             </Button>
           </Footer>
         </ModalView>

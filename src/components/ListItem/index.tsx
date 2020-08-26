@@ -3,6 +3,7 @@ import { Alert, Animated, Text, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import MCIIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SLIcon from 'react-native-vector-icons/SimpleLineIcons';
+import translate from '~/translations';
 
 import { TableName } from '~/types/types';
 
@@ -15,11 +16,22 @@ type ListItemProps = {
 
 const ListItem: React.FC<ListItemProps> = ({
   item,
-  openConfirmationModal,
+  navigation,
+  parentScreen,
 }: ListItemProps) => {
   function renderRightAction() {
     return (
-      <TrashButton onPress={() => openConfirmationModal(item.name)}>
+      <TrashButton
+        onPress={() =>
+          navigation.navigate('MessageModal', {
+            title: translate('attention'),
+            message: translate('deleteItemBody'),
+            cancelText: translate('cancel'),
+            confirmText: translate('yes'),
+            item,
+            parentScreen,
+          })
+        }>
         <SLIcon name="trash" size={24} color="#fff" />
       </TrashButton>
     );

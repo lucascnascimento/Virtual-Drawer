@@ -16,16 +16,18 @@ type ListContainerProps = {
   getListItems: (searchParam?: string) => Promise<ResultSet>;
   deleteItem: (name: string) => Promise<ResultSet>;
   searchParam?: string;
+  parentScreen: string;
 };
 
 const ListContainer = ({
   getListItems,
   deleteItem,
   searchParam,
+  navigation,
+  parentScreen,
+  toDelete,
 }: ListContainerProps): JSX.Element => {
   const [list, setList] = useState<Array<TableName>>([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [itemToBeDeleted, setItemToBeDeleted] = useState('');
   const [visibleToast, setVisibleToast] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -65,21 +67,6 @@ const ListContainer = ({
     }
   }
 
-  function openModal(name: string) {
-    setModalVisible(true);
-    setItemToBeDeleted(name);
-  }
-
-  async function confirmModalAction() {
-    await deleteFromList(itemToBeDeleted);
-    setModalVisible(false);
-    setVisibleToast(true);
-  }
-
-  function cancelModalAction() {
-    setModalVisible(false);
-  }
-
   return (
     <View testID="ListContainer">
       {loading ? (
@@ -89,20 +76,16 @@ const ListContainer = ({
           data={list}
           keyExtractor={(listItem) => listItem.name}
           renderItem={({ item }) => (
-            <ListItem item={item} openConfirmationModal={openModal} />
+            <ListItem
+              item={item}
+              navigation={navigation}
+              parentScreen={parentScreen}
+            />
           )}
           ItemSeparatorComponent={() => <Separator />}
         />
       )}
-      <MessageModal
-        visible={modalVisible}
-        title={translate('attention')}
-        message={translate('deleteItemBody')}
-        cancelText={translate('cancel')}
-        confirmText={translate('yes')}
-        cancelAction={cancelModalAction}
-        confirmAction={confirmModalAction}
-      />
+
       <Toast visible={visibleToast} message={translate('drawerDeleted')} />
     </View>
   );
