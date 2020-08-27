@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, StyleSheet, Text } from 'react-native';
+import { MessageModalProps } from '~/types/types';
 
 import {
   Container,
@@ -10,13 +11,6 @@ import {
   Button,
   ModalView,
 } from './styles';
-
-interface MessageModalProps {
-  title: string;
-  message: string;
-  confirmText: string;
-  cancelText: string;
-}
 
 const MessageModal: React.FC<MessageModalProps> = ({
   navigation,
