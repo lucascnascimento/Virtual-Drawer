@@ -21,17 +21,14 @@ export interface TableName {
 
 //! MainStack
 export type MainStackParamList = {
-  Home: {
-    render: boolean;
-    item?: TableName;
-  };
+  Home: undefined;
   SearchTable: undefined;
 };
 
 //! @MainStack Home Screen
 type HomeScreenRouteProp = RouteProp<MainStackParamList, 'Home'>;
 
-type HomeScreenNavigationProp = CompositeNavigationProp<
+export type HomeScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<MainStackParamList, 'Home'>,
   StackNavigationProp<RootStackParamList>
 >;
@@ -58,10 +55,13 @@ export type RootStackParamList = {
   MessageModal: {
     title: string;
     message: string;
-    cancelText: string;
-    confirmText: string;
-    item: TableName;
-    parentScreen: string;
+    leftButtonLable: string;
+    rightButtonLable: string;
+    leftButtonHandler: () => void;
+    rightButtonHandler:
+      | ((name: string) => Promise<void>)
+      | (() => Promise<void>);
+    item: string;
   };
 };
 
