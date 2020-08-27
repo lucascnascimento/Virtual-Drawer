@@ -13,7 +13,6 @@ import {
 } from './styles';
 
 const MessageModal: React.FC<MessageModalProps> = ({
-  navigation,
   route,
 }: MessageModalProps) => {
   return (
@@ -27,22 +26,14 @@ const MessageModal: React.FC<MessageModalProps> = ({
             <Text>{route.params.message}</Text>
           </Body>
           <Footer>
-            <Button
-              onPress={() =>
-                navigation.navigate(route.params.parentScreen, {
-                  render: false,
-                })
-              }>
-              <Text>{route.params.cancelText}</Text>
+            <Button onPress={route.params.leftButtonHandler}>
+              <Text>{route.params.leftButtonLable}</Text>
             </Button>
             <Button
               onPress={() =>
-                navigation.navigate(route.params.parentScreen, {
-                  render: true,
-                  item: route.params.item,
-                })
+                route.params.rightButtonHandler(route.params.item)
               }>
-              <Text>{route.params.confirmText}</Text>
+              <Text>{route.params.rightButtonLable}</Text>
             </Button>
           </Footer>
         </ModalView>

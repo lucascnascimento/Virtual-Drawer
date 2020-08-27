@@ -1,9 +1,7 @@
 import React from 'react';
-import { Alert, Animated, Text, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import MCIIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SLIcon from 'react-native-vector-icons/SimpleLineIcons';
-import translate from '~/translations';
 
 import { TableName } from '~/types/types';
 
@@ -11,27 +9,16 @@ import { Container, Icon, Body, BodyTitle, TrashButton } from './styles';
 
 type ListItemProps = {
   item: TableName;
-  openConfirmationModal: (name: string) => void;
+  trashButtonAction: (name: string) => void;
 };
 
 const ListItem: React.FC<ListItemProps> = ({
   item,
-  navigation,
-  parentScreen,
+  trashButtonAction,
 }: ListItemProps) => {
   function renderRightAction() {
     return (
-      <TrashButton
-        onPress={() =>
-          navigation.navigate('MessageModal', {
-            title: translate('attention'),
-            message: translate('deleteItemBody'),
-            cancelText: translate('cancel'),
-            confirmText: translate('yes'),
-            item,
-            parentScreen,
-          })
-        }>
+      <TrashButton onPress={() => trashButtonAction(item.name)}>
         <SLIcon name="trash" size={24} color="#fff" />
       </TrashButton>
     );
