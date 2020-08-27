@@ -13,11 +13,12 @@ import MessageModal from './components/MessageModal';
 import SearchAndAddIcons from '~/components/SearchAndAddIcons';
 
 import { configStore } from '~/store';
+import { MainStackParamList, RootStackParamList } from './types/types';
 
 const { store } = configStore();
 
-const MainStack = createStackNavigator();
-const RootStack = createStackNavigator();
+const MainStack = createStackNavigator<MainStackParamList>();
+const RootStack = createStackNavigator<RootStackParamList>();
 
 function MainStackScreen() {
   return (
