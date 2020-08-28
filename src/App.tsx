@@ -24,6 +24,7 @@ function MainStackScreen() {
       <MainStack.Screen
         name="Home"
         component={Home}
+        initialParams={{ deletedItems: [] }}
         options={({ navigation, route }) => ({
           title: translate('drawers'),
           headerLeft: () => (

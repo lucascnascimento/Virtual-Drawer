@@ -24,7 +24,9 @@ export interface TableName {
 
 //! MainStack
 export type MainStackParamList = {
-  Home: undefined;
+  Home: {
+    deletedItems: Array<string>;
+  };
   SearchTable: undefined;
 };
 

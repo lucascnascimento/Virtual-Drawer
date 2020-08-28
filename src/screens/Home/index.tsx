@@ -11,7 +11,7 @@ import AddButton from '~/components/AddButton';
 
 import db from '~/database/db';
 
-const Home: React.FC<HomeProps> = ({ navigation }: HomeProps) => {
+const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<Array<TableName>>([]);
 
@@ -50,7 +50,7 @@ const Home: React.FC<HomeProps> = ({ navigation }: HomeProps) => {
    */
   useEffect(() => {
     getList();
-  }, []);
+  }, [route.params.deletedItems]);
 
   useLayoutEffect(() => {
     /**
