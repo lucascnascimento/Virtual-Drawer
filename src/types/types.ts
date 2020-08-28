@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp, CompositeNavigationProp } from '@react-navigation/native';
+import { GestureResponderEvent } from 'react-native';
 
 export interface Item {
   id?: number;
@@ -18,6 +19,8 @@ export interface TablesList {
 export interface TableName {
   name: string;
 }
+
+// #region Navigator and Screen types
 
 //! MainStack
 export type MainStackParamList = {
@@ -95,3 +98,13 @@ export type InputModalProps = {
   route: InputModalScreenRouteProp;
   navigation: InputModalScreenNavigationProp;
 };
+
+// #endregion
+
+// #region Styled-components
+
+export interface TouchableOpacityProps {
+  onPress: (event: GestureResponderEvent) => void | undefined;
+}
+
+// #endregion

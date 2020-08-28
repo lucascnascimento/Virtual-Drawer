@@ -5,7 +5,9 @@ import translate from '~/translations';
 
 import ListContainer from '~/components/ListContainer';
 import ListItem from '~/components/ListItem';
-import SearchAndAddIcons from '~/components/SearchAndAddIcons';
+import HeaderRightIcons from '~/components/HeaderRightIcons';
+import SearchButton from '~/components/SearchButton';
+import AddButton from '~/components/AddButton';
 
 import db from '~/database/db';
 
@@ -71,7 +73,20 @@ const Home: React.FC<HomeProps> = ({ navigation }: HomeProps) => {
 
     navigation.setOptions({
       headerRight: () => (
-        <SearchAndAddIcons handleAddAction={handleAddAction} />
+        <HeaderRightIcons
+          leftSideButton={() => (
+            <SearchButton
+              searchButtonAction={() => navigation.navigate('SearchTable')}
+            />
+          )}
+          rightSideButton={() => (
+            <AddButton
+              addButtonAction={() =>
+                navigation.navigate('InputModal', { handleAddAction })
+              }
+            />
+          )}
+        />
       ),
     });
   }, [navigation]);
