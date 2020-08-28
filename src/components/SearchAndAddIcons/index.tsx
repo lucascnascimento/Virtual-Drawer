@@ -17,13 +17,8 @@ const SearchAndAddIcons: React.FC<SearchAndAddIconsProps> = ({
   return (
     <>
       <Container>
-        <SearchButton>
-          <SLIIcon
-            onPress={() => navigation.navigate('SearchTable')}
-            name="magnifier"
-            size={24}
-            color="#000"
-          />
+        <SearchButton onPress={() => navigation.navigate('SearchTable')}>
+          <SLIIcon name="magnifier" size={24} color="#000" />
         </SearchButton>
 
         <AddButton
