@@ -10,8 +10,6 @@ import SearchTable from '~/screens/SearchTable';
 import InputModal from '~/components/InputModal';
 import MessageModal from './components/MessageModal';
 
-import SearchAndAddIcons from '~/components/SearchAndAddIcons';
-
 import { configStore } from '~/store';
 import { MainStackParamList, RootStackParamList } from './types/types';
 
@@ -28,7 +26,6 @@ function MainStackScreen() {
         component={Home}
         options={({ navigation, route }) => ({
           title: translate('drawers'),
-          headerRight: () => <SearchAndAddIcons navigation={navigation} />,
           headerLeft: () => (
             <SLIIcons
               name="settings"

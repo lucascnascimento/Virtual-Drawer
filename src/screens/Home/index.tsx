@@ -1,21 +1,21 @@
-import { BaseRouter, useIsFocused } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View } from 'react-native';
 import { HomeProps, TableName } from '~/types/types.ts';
 import translate from '~/translations';
 
 import ListContainer from '~/components/ListContainer';
 import ListItem from '~/components/ListItem';
+import SearchAndAddIcons from '~/components/SearchAndAddIcons';
 
 import db from '~/database/db';
-
-// Toda hora que eu foco aqui ela recarrega
-// Tipar os parametros da home screen
 
 const Home: React.FC<HomeProps> = ({ navigation }: HomeProps) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<Array<TableName>>([]);
 
+  /**
+   * Get tables from database
+   */
   async function getList() {
     setLoading(true);
     const res = await db.indexTables();
@@ -43,9 +43,38 @@ const Home: React.FC<HomeProps> = ({ navigation }: HomeProps) => {
     }
   }
 
+  /**
+   * Loads the tables list from the database on component mount
+   */
   useEffect(() => {
     getList();
   }, []);
+
+  useLayoutEffect(() => {
+    /**
+     * Create a database table on InputModal add action
+     * @param inputText Database table name
+     */
+    async function handleAddAction(inputText: string) {
+      try {
+        const res = await db.createTable(inputText);
+        const { rows } = res;
+        for (let i = 0; i < rows.length; i++) {
+          const item = rows.item(i);
+        }
+        navigation.navigate('Home');
+        getList();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    navigation.setOptions({
+      headerRight: () => (
+        <SearchAndAddIcons handleAddAction={handleAddAction} />
+      ),
+    });
+  }, [navigation]);
 
   /**
    * Action to be performed by the ListItem's trash button

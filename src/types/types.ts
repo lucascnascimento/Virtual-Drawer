@@ -51,7 +51,9 @@ export type SearchTableProps = {
 //! RootStack
 export type RootStackParamList = {
   Main: undefined;
-  InputModal: undefined;
+  InputModal: {
+    handleAddAction: (inputText: string) => Promise<void>;
+  };
   MessageModal: {
     title: string;
     message: string;
@@ -82,11 +84,14 @@ export type MessageModalProps = {
 };
 
 //! RootStack InputModal
+type InputModalScreenRouteProp = RouteProp<RootStackParamList, 'InputModal'>;
+
 type InputModalScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'InputModal'
 >;
 
 export type InputModalProps = {
+  route: InputModalScreenRouteProp;
   navigation: InputModalScreenNavigationProp;
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Modal, Alert, Text, StyleSheet, TextInput } from 'react-native';
+import { Modal, Alert, Text, StyleSheet } from 'react-native';
 import translate from '~/translations';
-import db from '~/database/db';
+import { InputModalProps } from '~/types/types';
 
 import {
   Container,
@@ -14,7 +14,10 @@ import {
   ModalView,
 } from './styles';
 
-const InputModal = ({ navigation }) => {
+const InputModal: React.FC<InputModalProps> = ({
+  navigation,
+  route,
+}: InputModalProps) => {
   const [inputText, setInputText] = useState('');
   const [inputError, setInputError] = useState(false);
 
@@ -32,22 +35,6 @@ const InputModal = ({ navigation }) => {
       setInputError(true);
     } else {
       setInputError(false);
-    }
-  }
-
-  /**
-   * Create a database table
-   */
-  async function handleSubmit() {
-    try {
-      const res = await db.createTable(inputText);
-      const { rows } = res;
-      for (let i = 0; i < rows.length; i++) {
-        const item = rows.item(i);
-      }
-      navigation.goBack();
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -71,7 +58,9 @@ const InputModal = ({ navigation }) => {
               onChangeText={handleTextChange}
               placeholder="Gaveta"
               returnKeyType="send"
-              onSubmitEditing={handleSubmit}
+              onSubmitEditing={() => {
+                route.params.handleAddAction(inputText);
+              }}
             />
           </Body>
           <Footer>
@@ -82,7 +71,9 @@ const InputModal = ({ navigation }) => {
               <Text>{translate('cancel')}</Text>
             </Button>
             <Button
-              onPress={handleSubmit}
+              onPress={() => {
+                route.params.handleAddAction(inputText);
+              }}
               disabled={inputError}
               style={inputError && { opacity: 0.5 }}>
               <Text>{translate('create')}</Text>

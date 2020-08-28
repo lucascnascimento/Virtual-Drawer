@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SLIIcon from 'react-native-vector-icons/SimpleLineIcons';
 import MIIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import InputModal from '~/components/InputModal';
+import { useNavigation } from '@react-navigation/native';
 
 import { Container, SearchButton, AddButton } from './styles';
 
-const SearchAndAddIcons: React.FC = ({ navigation }) => {
+type SearchAndAddIconsProps = {
+  handleAddAction: (inputText: string) => Promise<void>;
+};
+
+const SearchAndAddIcons: React.FC<SearchAndAddIconsProps> = ({
+  handleAddAction,
+}: SearchAndAddIconsProps) => {
+  const navigation = useNavigation();
+
   return (
     <>
       <Container>
@@ -19,7 +26,10 @@ const SearchAndAddIcons: React.FC = ({ navigation }) => {
           />
         </SearchButton>
 
-        <AddButton onPress={() => navigation.navigate('InputModal')}>
+        <AddButton
+          onPress={() =>
+            navigation.navigate('InputModal', { handleAddAction })
+          }>
           <MIIcons name="plus" size={32} color="#000" />
         </AddButton>
       </Container>
