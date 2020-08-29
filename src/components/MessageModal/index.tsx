@@ -26,7 +26,7 @@ const MessageModal: React.FC<MessageModalProps> = ({
             <Text>{route.params.message}</Text>
           </Body>
           <Footer>
-            <Button onPress={route.params.leftButtonHandler}>
+            <Button onPress={() => route.params.leftButtonHandler()}>
               <Text>{route.params.leftButtonLable}</Text>
             </Button>
             <Button
