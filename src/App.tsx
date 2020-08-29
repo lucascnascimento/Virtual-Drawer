@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SLIIcons from 'react-native-vector-icons/SimpleLineIcons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import translate from '~/translations';
 
 import Home from '~/screens/Home';
 import SearchTable from '~/screens/SearchTable';
 import InputModal from '~/components/InputModal';
-import MessageModal from './components/MessageModal';
+import MessageModal from '~/components/MessageModal';
+import Options from '~/screens/Options';
 
 import { configStore } from '~/store';
 import { MainStackParamList, RootStackParamList } from './types/types';
@@ -28,12 +30,14 @@ function MainStackScreen() {
         options={({ navigation, route }) => ({
           title: translate('drawers'),
           headerLeft: () => (
-            <SLIIcons
-              name="settings"
-              color="#000"
-              size={24}
-              style={{ paddingLeft: 20 }}
-            />
+            <TouchableOpacity onPress={() => navigation.navigate('Options')}>
+              <SLIIcons
+                name="settings"
+                color="#000"
+                size={24}
+                style={{ paddingLeft: 20 }}
+              />
+            </TouchableOpacity>
           ),
         })}
       />
@@ -44,6 +48,7 @@ function MainStackScreen() {
           headerShown: false,
         }}
       />
+      <MainStack.Screen name="Options" component={Options} />
     </MainStack.Navigator>
   );
 }
