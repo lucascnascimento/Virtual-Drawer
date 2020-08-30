@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { HomeProps, TableName } from '~/types/types.ts';
 import translate from '~/translations';
 
@@ -11,9 +12,14 @@ import AddButton from '~/components/AddButton';
 
 import db from '~/database/db';
 
-const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
+/**
+ * App's home screen
+ * @param route Parameters to be sent by SearchTable screen and trigger re-render
+ */
+const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<Array<TableName>>([]);
+  const navigation = useNavigation();
 
   /**
    * Get tables from database
@@ -52,6 +58,9 @@ const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
     getList();
   }, [route.params.deletedItems]);
 
+  /**
+   * Set the right header icons and defines action for handling the add table function
+   */
   useLayoutEffect(() => {
     /**
      * Create a database table on InputModal add action
@@ -91,6 +100,11 @@ const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
     });
   }, [navigation]);
 
+  // Handles action from modal's left button
+  function leftButtonHandler() {
+    navigation.navigate('Home');
+  }
+
   /**
    * Action to be performed by the ListItem's trash button
    * @param name Name of the item to be deleted
@@ -101,7 +115,7 @@ const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
       message: translate('deleteItemBody'),
       leftButtonLable: translate('cancel'),
       rightButtonLable: translate('yes'),
-      leftButtonHandler: () => navigation.navigate('Home'),
+      leftButtonHandler,
       rightButtonHandler: deleteFromList,
       item: name,
     });

@@ -12,10 +12,18 @@ type ListItemProps = {
   trashButtonAction: (name: string) => void;
 };
 
+/**
+ * Renders an item information
+ * @param item Item to be rendered
+ * @param trashButtonAction Action to be performed by the trash button
+ */
 const ListItem: React.FC<ListItemProps> = ({
   item,
   trashButtonAction,
 }: ListItemProps) => {
+  /**
+   * Renders element when swiped to the left
+   */
   function renderRightAction() {
     return (
       <TrashButton onPress={() => trashButtonAction(item.name)}>
@@ -39,5 +47,3 @@ const ListItem: React.FC<ListItemProps> = ({
 };
 
 export default ListItem;
-
-// todo: treat handle delete error

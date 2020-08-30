@@ -7,7 +7,11 @@ type AddButtonProps = {
   addButtonAction: () => void;
 };
 
-const AddButton: React.FC<AddButtonProps> = (props) => {
+/**
+ * Renders an add button
+ * @param addButtonAction Action to be performed by the button
+ */
+const AddButton: React.FC<AddButtonProps> = (props: AddButtonProps) => {
   const { addButtonAction } = props;
 
   return (

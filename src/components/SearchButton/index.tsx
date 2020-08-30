@@ -7,7 +7,13 @@ type SearchButtonProps = {
   searchButtonAction: () => void;
 };
 
-const SearchButton: React.FC<SearchButtonProps> = (props) => {
+/**
+ * Renders a search button
+ * @param searchButtonAction Action to be performed by the button
+ */
+const SearchButton: React.FC<SearchButtonProps> = (
+  props: SearchButtonProps,
+) => {
   const { searchButtonAction } = props;
 
   return (

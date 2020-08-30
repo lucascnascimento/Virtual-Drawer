@@ -7,6 +7,11 @@ type HeaderRightIconsProps = {
   rightSideButton?: () => JSX.Element;
 };
 
+/**
+ * Renders two components to be positioned on the header
+ * @param leftSideButton Component to be rendered on the left side
+ * @param rightSideButton Component to be rendered on the right side
+ */
 const HeaderRightIcons: React.FC<HeaderRightIconsProps> = ({
   leftSideButton,
   rightSideButton,

@@ -14,6 +14,12 @@ type ListContainerProps = {
   renderItem: ({ item }: { item: TableName }) => JSX.Element;
 };
 
+/**
+ * Renders a list
+ * @param list List of items to be rendered
+ * @param loading Loading flag to show loading effect
+ * @param renderItem Component to be rendered by the ListContainer
+ */
 const ListContainer: React.FC<ListContainerProps> = (
   props: ListContainerProps,
 ) => {

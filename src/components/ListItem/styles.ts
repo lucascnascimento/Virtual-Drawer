@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacityProps } from '~/types/types';
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled(TouchableOpacity)<TouchableOpacityProps>`
   flex-direction: row;
   padding: 20px;
   justify-content: flex-start;
