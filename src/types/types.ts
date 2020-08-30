@@ -25,9 +25,10 @@ export interface TableName {
 //! MainStack
 export type MainStackParamList = {
   Home: {
-    deletedItems: Array<string>;
+    deletedItems?: Array<string>;
   };
   SearchTable: undefined;
+  Options: undefined;
 };
 
 //! @MainStack Home Screen
@@ -51,6 +52,16 @@ type SearchTableScreenNavigationProp = CompositeNavigationProp<
 
 export type SearchTableProps = {
   navigation: SearchTableScreenNavigationProp;
+};
+
+//! @MainStack Options
+type OptionsScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<MainStackParamList, 'Options'>,
+  StackNavigationProp<RootStackParamList>
+>;
+
+export type OptionsProps = {
+  navigation: OptionsScreenNavigationProp;
 };
 
 //! RootStack
