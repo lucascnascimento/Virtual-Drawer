@@ -8,17 +8,25 @@ import { Container } from './styles';
 
 type SearchBarProps = {
   setSearchField: React.Dispatch<React.SetStateAction<string>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 /**
  * Search Bar component
  * @param setSearchField Function to send the TextInput value to the parent's state
+ * @param setLoading State setter to display a Loading animation indicating the
+ * search is being perfromed
  */
 const SearchBar: React.FC<SearchBarProps> = ({
   setSearchField,
+  setLoading,
 }: SearchBarProps) => {
   const [value, setValue] = useState('');
 
+  /**
+   * Debounce the setting of the TextInput to parent
+   */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handler = useCallback(
     debounce(() => {
       setSearchField(value);
@@ -26,9 +34,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
     [value],
   );
 
+  // Execute the debounce and set's the loading to the parent component
   useEffect(() => {
     handler();
-  }, [handler, value]);
+    if (setLoading) setLoading(true);
+  }, [handler, setLoading, value]);
 
   return (
     <Container>
