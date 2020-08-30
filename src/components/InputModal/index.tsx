@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Alert, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import translate from '~/translations';
 import { InputModalProps } from '~/types/types';
 
@@ -14,6 +14,23 @@ import {
   ModalView,
 } from './styles';
 
+const styles = StyleSheet.create({
+  boxShadow: {
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+});
+
+/**
+ * Creates an modal with an input text field
+ * @param navigation Navigation object passed by previous screen
+ * @param route Route props
+ */
 const InputModal: React.FC<InputModalProps> = ({
   navigation,
   route,
@@ -39,62 +56,42 @@ const InputModal: React.FC<InputModalProps> = ({
   }
 
   return (
-    <Modal
-      animationType="fade"
-      transparent
-      visible
-      onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
-      }}>
-      <Container>
-        <ModalView style={styles.boxShadow}>
-          <Header>
-            <Title>{translate('enterDrawerName')}</Title>
-          </Header>
-          <Body>
-            <Input
-              inputError={inputError}
-              value={inputText}
-              onChangeText={handleTextChange}
-              placeholder="Gaveta"
-              returnKeyType="send"
-              onSubmitEditing={() => {
-                route.params.handleAddAction(inputText);
-              }}
-            />
-          </Body>
-          <Footer>
-            <Button
-              onPress={() => {
-                navigation.goBack();
-              }}>
-              <Text>{translate('cancel')}</Text>
-            </Button>
-            <Button
-              onPress={() => {
-                route.params.handleAddAction(inputText);
-              }}
-              disabled={inputError}
-              style={inputError && { opacity: 0.5 }}>
-              <Text>{translate('create')}</Text>
-            </Button>
-          </Footer>
-        </ModalView>
-      </Container>
-    </Modal>
+    <Container>
+      <ModalView style={styles.boxShadow}>
+        <Header>
+          <Title>{translate('enterDrawerName')}</Title>
+        </Header>
+        <Body>
+          <Input
+            inputError={inputError}
+            value={inputText}
+            onChangeText={handleTextChange}
+            placeholder="Gaveta"
+            returnKeyType="send"
+            onSubmitEditing={() => {
+              route.params.handleAddAction(inputText);
+            }}
+          />
+        </Body>
+        <Footer>
+          <Button
+            onPress={() => {
+              navigation.goBack();
+            }}>
+            <Text>{translate('cancel')}</Text>
+          </Button>
+          <Button
+            onPress={() => {
+              route.params.handleAddAction(inputText);
+            }}
+            disabled={inputError}
+            style={inputError && { opacity: 0.5 }}>
+            <Text>{translate('create')}</Text>
+          </Button>
+        </Footer>
+      </ModalView>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  boxShadow: {
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-});
 
 export default InputModal;

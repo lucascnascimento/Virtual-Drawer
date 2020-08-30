@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+type InputProps = {
+  inputError: boolean;
+};
+
 export const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -25,7 +29,7 @@ export const Body = styled.View`
   padding: 12px 0px;
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput<InputProps>`
   border-bottom-width: 1px;
   padding-bottom: 0px;
   width: 220px;
