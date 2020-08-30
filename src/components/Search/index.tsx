@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import MCIIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ResultSet } from 'react-native-sqlite-storage';
+import { View } from 'react-native';
 import { TableName } from '~/types/types';
 
 import SearchBar from '~/components/SearchBar';
@@ -15,15 +16,17 @@ import { Header, Icon } from './styles';
 type SearchProps = {
   queryFunction: (searchField: string) => Promise<ResultSet>;
   deleteItem: (name: string) => Promise<ResultSet>;
+  parent: string;
 };
 
 /**
  * Creates a container to search for items on the database, show and delete them.
  * @param queryFunction A function that will execute a search query in the database.
  * @param deleteItem A function to delete an item from the list.
+ * @param parent The name of the parent screen
  */
 const Search: React.FC<SearchProps> = (props: SearchProps) => {
-  const { deleteItem, queryFunction } = props;
+  const { deleteItem, queryFunction, parent } = props;
 
   const [searchValue, setSearchValue] = useState('');
   const [loading, setLoading] = useState(false);
@@ -31,9 +34,9 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
   const [deletedItems, setDeletedItems] = useState<Array<string>>([]);
   const navigation = useNavigation();
 
+  // Search for an item that is being typed on the search bar
   useEffect(() => {
-    async function searchTables() {
-      setLoading(true);
+    async function search() {
       const res = await queryFunction(searchValue);
       const { rows } = res;
       const itemArray: TableName[] = [];
@@ -44,7 +47,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
       setLoading(false);
     }
 
-    searchTables();
+    search();
   }, [queryFunction, searchValue]);
 
   /**
@@ -57,10 +60,17 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
       const newList = list.filter((item) => item.name !== name);
       setList(newList);
       setDeletedItems((oldArray) => [...oldArray, name]);
-      navigation.navigate('SearchTable');
+      navigation.navigate(parent);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  /**
+   * Action to be performed by the MessageModal's left button
+   */
+  function leftButtonHandler() {
+    navigation.navigate(parent);
   }
 
   /**
@@ -73,7 +83,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
       message: translate('deleteItemBody'),
       leftButtonLable: translate('cancel'),
       rightButtonLable: translate('yes'),
-      leftButtonHandler: () => navigation.navigate('SearchTable'),
+      leftButtonHandler,
       rightButtonHandler: deleteFromList,
       item: name,
     });
@@ -85,16 +95,18 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
         <Icon onPress={() => navigation.navigate('Home', { deletedItems })}>
           <MCIIcons name="arrow-left" size={32} color="rgba(0,0,0,0.32)" />
         </Icon>
-        <SearchBar setSearchField={setSearchValue} />
+        <SearchBar setSearchField={setSearchValue} setLoading={setLoading} />
       </Header>
 
-      <ListContainer
-        list={list}
-        loading={loading}
-        renderItem={({ item }) => (
-          <ListItem item={item} trashButtonAction={trashButtonAction} />
-        )}
-      />
+      <View style={{ flex: 1 }}>
+        <ListContainer
+          list={list}
+          loading={loading}
+          renderItem={({ item }) => (
+            <ListItem item={item} trashButtonAction={trashButtonAction} />
+          )}
+        />
+      </View>
     </>
   );
 };

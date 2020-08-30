@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacityProps } from '~/types/types';
 
 export const Header = styled.View`
   flex-direction: row;
@@ -7,7 +8,7 @@ export const Header = styled.View`
   justify-content: flex-start;
 `;
 
-export const Icon = styled(TouchableOpacity)`
+export const Icon = styled(TouchableOpacity)<TouchableOpacityProps>`
   padding-left: 10px;
   padding-right: 0px;
   margin-right: 0px;
