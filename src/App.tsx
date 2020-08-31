@@ -10,8 +10,8 @@ import Home from '~/screens/Home';
 import SearchTable from '~/screens/SearchTable';
 import Options from '~/screens/Options';
 import DrawerItems from '~/screens/DrawerItems';
-import InputModal from '~/components/InputModal';
-import MessageModal from '~/components/MessageModal';
+import InputModal from '~/screens/InputModal';
+import MessageModal from '~/screens/MessageModal';
 
 import { configStore } from '~/store';
 import { MainStackParamList, RootStackParamList } from './types/types';
