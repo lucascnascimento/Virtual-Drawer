@@ -12,7 +12,7 @@ const SearchTable: React.FC<SearchTableProps> = () => {
       queryFunction={db.selectTable}
       deleteItem={db.dropTable}
       parent="SearchTable"
-      navigateToOnItemPress="DrawerItems"
+      navigateToOnItemPress="TableItems"
     />
   );
 };

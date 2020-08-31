@@ -140,7 +140,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
           <ListItem
             item={item}
             trashButtonAction={trashButtonAction}
-            navigateTo="DrawerItems"
+            navigateTo="TableItems"
           />
         )}>
         <Toast visible={visibleToast} message={translate('drawerDeleted')} />

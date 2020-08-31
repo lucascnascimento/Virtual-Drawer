@@ -29,7 +29,7 @@ export type MainStackParamList = {
   };
   SearchTable: undefined;
   Options: undefined;
-  DrawerItems: {
+  TableItems: {
     tableName: string;
   };
 };
@@ -67,17 +67,17 @@ export type OptionsProps = {
   navigation: OptionsScreenNavigationProp;
 };
 
-//! @MainStack DrawerItems
-type DrawerItemsScreenRouteProp = RouteProp<MainStackParamList, 'DrawerItems'>;
+//! @MainStack TableItems
+type TableItemsScreenRouteProp = RouteProp<MainStackParamList, 'TableItems'>;
 
-type DrawerItemsScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<MainStackParamList, 'DrawerItems'>,
+type TableItemsScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<MainStackParamList, 'TableItems'>,
   StackNavigationProp<RootStackParamList>
 >;
 
-export type DrawerItemsProps = {
-  route: DrawerItemsScreenRouteProp;
-  navigation: DrawerItemsScreenNavigationProp;
+export type TableItemsProps = {
+  route: TableItemsScreenRouteProp;
+  navigation: TableItemsScreenNavigationProp;
 };
 
 //! RootStack

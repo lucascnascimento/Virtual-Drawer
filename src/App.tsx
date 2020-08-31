@@ -9,7 +9,7 @@ import translate from '~/translations';
 import Home from '~/screens/Home';
 import SearchTable from '~/screens/SearchTable';
 import Options from '~/screens/Options';
-import DrawerItems from '~/screens/DrawerItems';
+import TableItems from '~/screens/TableItems';
 import InputModal from '~/screens/InputModal';
 import MessageModal from '~/screens/MessageModal';
 
@@ -50,7 +50,7 @@ function MainStackScreen() {
         }}
       />
       <MainStack.Screen name="Options" component={Options} />
-      <MainStack.Screen name="DrawerItems" component={DrawerItems} />
+      <MainStack.Screen name="TableItems" component={TableItems} />
     </MainStack.Navigator>
   );
 }
