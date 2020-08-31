@@ -9,6 +9,7 @@ import ListItem from '~/components/ListItem';
 import HeaderRightIcons from '~/components/HeaderRightIcons';
 import SearchButton from '~/components/SearchButton';
 import AddButton from '~/components/AddButton';
+import Toast from '~/components/Toast';
 
 import db from '~/database/db';
 
@@ -20,6 +21,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<Array<TableName>>([]);
   const navigation = useNavigation();
+  const [visibleToast, setVisibleToast] = useState(false);
 
   /**
    * Get tables from database
@@ -46,6 +48,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
       const newList = list.filter((item) => item.name !== name);
       setList(newList);
       navigation.navigate('Home');
+      setVisibleToast(true);
     } catch (error) {
       console.log(error);
     }
@@ -57,6 +60,13 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
   useEffect(() => {
     getList();
   }, [route.params.deletedItems]);
+
+  /**
+   * Change toast state back to false
+   */
+  useEffect(() => {
+    setVisibleToast(false);
+  }, [visibleToast]);
 
   /**
    * Set the right header icons and defines action for handling the add table function
@@ -128,8 +138,9 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
         list={list}
         renderItem={({ item }) => (
           <ListItem item={item} trashButtonAction={trashButtonAction} />
-        )}
-      />
+        )}>
+        <Toast visible={visibleToast} message={translate('drawerDeleted')} />
+      </ListContainer>
     </View>
   );
 };

@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import translate from '~/translations';
 
 import { Separator } from './styles';
 
 import { TableName } from '~/types/types';
-import Toast from '../Toast';
 
 type ListContainerProps = {
   list: Array<TableName>;
   loading: boolean;
   renderItem: ({ item }: { item: TableName }) => JSX.Element;
+  children: React.ReactElement;
 };
 
 /**
@@ -19,17 +18,12 @@ type ListContainerProps = {
  * @param list List of items to be rendered
  * @param loading Loading flag to show loading effect
  * @param renderItem Component to be rendered by the ListContainer
+ * @param children Child component rendered by the list, usually a Toast
  */
 const ListContainer: React.FC<ListContainerProps> = (
   props: ListContainerProps,
 ) => {
-  const { list, loading, renderItem } = props;
-
-  const [visibleToast, setVisibleToast] = useState(false);
-
-  useEffect(() => {
-    setVisibleToast(false);
-  }, [visibleToast]);
+  const { list, loading, renderItem, children } = props;
 
   return (
     <View testID="ListContainer">
@@ -43,8 +37,7 @@ const ListContainer: React.FC<ListContainerProps> = (
           ItemSeparatorComponent={() => <Separator />}
         />
       )}
-
-      <Toast visible={visibleToast} message={translate('drawerDeleted')} />
+      {children}
     </View>
   );
 };

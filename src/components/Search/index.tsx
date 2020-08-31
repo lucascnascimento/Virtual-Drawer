@@ -10,6 +10,7 @@ import SearchBar from '~/components/SearchBar';
 import ListContainer from '~/components/ListContainer';
 import ListItem from '~/components/ListItem';
 import translate from '~/translations';
+import Toast from '../Toast';
 
 import { Header, Icon } from './styles';
 
@@ -32,6 +33,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<Array<TableName>>([]);
   const [deletedItems, setDeletedItems] = useState<Array<string>>([]);
+  const [visibleToast, setVisibleToast] = useState(false);
   const navigation = useNavigation();
 
   // Search for an item that is being typed on the search bar
@@ -51,6 +53,13 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
   }, [queryFunction, searchValue]);
 
   /**
+   * Change toast state back to false
+   */
+  useEffect(() => {
+    setVisibleToast(false);
+  }, [visibleToast]);
+
+  /**
    * Deletes an item from the list.
    * @param name Name of the item to be deleted from the list.
    */
@@ -61,6 +70,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
       setList(newList);
       setDeletedItems((oldArray) => [...oldArray, name]);
       navigation.navigate(parent);
+      setVisibleToast(true);
     } catch (error) {
       console.log(error);
     }
@@ -104,8 +114,9 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
           loading={loading}
           renderItem={({ item }) => (
             <ListItem item={item} trashButtonAction={trashButtonAction} />
-          )}
-        />
+          )}>
+          <Toast visible={visibleToast} message={translate('drawerDeleted')} />
+        </ListContainer>
       </View>
     </>
   );

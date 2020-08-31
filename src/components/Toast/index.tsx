@@ -13,10 +13,12 @@ interface ToastProps {
  */
 const Toast: React.FC<ToastProps> = ({ visible, message }: ToastProps) => {
   if (visible) {
-    ToastAndroid.showWithGravity(
+    ToastAndroid.showWithGravityAndOffset(
       message,
       ToastAndroid.SHORT,
       ToastAndroid.BOTTOM,
+      0,
+      100,
     );
     return null;
   }
