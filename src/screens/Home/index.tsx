@@ -137,7 +137,11 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
         loading={loading}
         list={list}
         renderItem={({ item }) => (
-          <ListItem item={item} trashButtonAction={trashButtonAction} />
+          <ListItem
+            item={item}
+            trashButtonAction={trashButtonAction}
+            navigateTo="DrawerItems"
+          />
         )}>
         <Toast visible={visibleToast} message={translate('drawerDeleted')} />
       </ListContainer>

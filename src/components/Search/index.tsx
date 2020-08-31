@@ -18,6 +18,7 @@ type SearchProps = {
   queryFunction: (searchField: string) => Promise<ResultSet>;
   deleteItem: (name: string) => Promise<ResultSet>;
   parent: string;
+  navigateToOnItemPress: string;
 };
 
 /**
@@ -25,9 +26,10 @@ type SearchProps = {
  * @param queryFunction A function that will execute a search query in the database.
  * @param deleteItem A function to delete an item from the list.
  * @param parent The name of the parent screen
+ * @param navigateToOnItemPress Name of the Name of the screen that will be navigated to when an item is pressed
  */
 const Search: React.FC<SearchProps> = (props: SearchProps) => {
-  const { deleteItem, queryFunction, parent } = props;
+  const { deleteItem, queryFunction, parent, navigateToOnItemPress } = props;
 
   const [searchValue, setSearchValue] = useState('');
   const [loading, setLoading] = useState(false);
@@ -113,7 +115,11 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
           list={list}
           loading={loading}
           renderItem={({ item }) => (
-            <ListItem item={item} trashButtonAction={trashButtonAction} />
+            <ListItem
+              item={item}
+              trashButtonAction={trashButtonAction}
+              navigateTo={navigateToOnItemPress}
+            />
           )}>
           <Toast visible={visibleToast} message={translate('drawerDeleted')} />
         </ListContainer>
