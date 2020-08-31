@@ -25,10 +25,11 @@ const TableItems: React.FC<TableItemsProps> = (props: TableItemsProps) => {
      * @param inputText Database table name
      */
     async function handleAddAction(inputText: string) {
-      console.log('handle Add Action');
+      navigation.navigate('AddItem');
     }
 
     navigation.setOptions({
+      title: route.params.tableName,
       headerRight: () => (
         <HeaderRightIcons
           leftSideButton={() => (

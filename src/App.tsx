@@ -10,6 +10,7 @@ import Home from '~/screens/Home';
 import SearchTable from '~/screens/SearchTable';
 import Options from '~/screens/Options';
 import TableItems from '~/screens/TableItems';
+import AddItem from '~/screens/AddItem';
 import InputModal from '~/screens/InputModal';
 import MessageModal from '~/screens/MessageModal';
 
@@ -51,6 +52,7 @@ function MainStackScreen() {
       />
       <MainStack.Screen name="Options" component={Options} />
       <MainStack.Screen name="TableItems" component={TableItems} />
+      <MainStack.Screen name="AddItem" component={AddItem} />
     </MainStack.Navigator>
   );
 }

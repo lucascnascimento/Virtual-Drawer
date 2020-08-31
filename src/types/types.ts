@@ -32,6 +32,7 @@ export type MainStackParamList = {
   TableItems: {
     tableName: string;
   };
+  AddItem: undefined;
 };
 
 //! @MainStack Home Screen
@@ -78,6 +79,19 @@ type TableItemsScreenNavigationProp = CompositeNavigationProp<
 export type TableItemsProps = {
   route: TableItemsScreenRouteProp;
   navigation: TableItemsScreenNavigationProp;
+};
+
+//! @MainStack AddItem
+type AddItemScreenRouteProp = RouteProp<MainStackParamList, 'AddItem'>;
+
+type AddItemScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<MainStackParamList, 'AddItem'>,
+  StackNavigationProp<RootStackParamList>
+>;
+
+export type AddItemProps = {
+  route: AddItemScreenRouteProp;
+  navigation: AddItemScreenNavigationProp;
 };
 
 //! RootStack
