@@ -8,9 +8,10 @@ import translate from '~/translations';
 
 import Home from '~/screens/Home';
 import SearchTable from '~/screens/SearchTable';
+import Options from '~/screens/Options';
+import DrawerItems from '~/screens/DrawerItems';
 import InputModal from '~/components/InputModal';
 import MessageModal from '~/components/MessageModal';
-import Options from '~/screens/Options';
 
 import { configStore } from '~/store';
 import { MainStackParamList, RootStackParamList } from './types/types';
@@ -49,6 +50,7 @@ function MainStackScreen() {
         }}
       />
       <MainStack.Screen name="Options" component={Options} />
+      <MainStack.Screen name="DrawerItems" component={DrawerItems} />
     </MainStack.Navigator>
   );
 }

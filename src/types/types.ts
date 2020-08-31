@@ -29,6 +29,9 @@ export type MainStackParamList = {
   };
   SearchTable: undefined;
   Options: undefined;
+  DrawerItems: {
+    tableName: string;
+  };
 };
 
 //! @MainStack Home Screen
@@ -62,6 +65,19 @@ type OptionsScreenNavigationProp = CompositeNavigationProp<
 
 export type OptionsProps = {
   navigation: OptionsScreenNavigationProp;
+};
+
+//! @MainStack DrawerItems
+type DrawerItemsScreenRouteProp = RouteProp<MainStackParamList, 'DrawerItems'>;
+
+type DrawerItemsScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<MainStackParamList, 'DrawerItems'>,
+  StackNavigationProp<RootStackParamList>
+>;
+
+export type DrawerItemsProps = {
+  route: DrawerItemsScreenRouteProp;
+  navigation: DrawerItemsScreenNavigationProp;
 };
 
 //! RootStack
