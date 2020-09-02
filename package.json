@@ -21,6 +21,7 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-native": "0.63.0",
+    "react-native-camera": "^3.38.0",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-localize": "^1.4.1",
     "react-native-paper": "^4.1.0",
