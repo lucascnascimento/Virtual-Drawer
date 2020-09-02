@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SLIIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Provider as PaperProvider } from 'react-native-paper';
 import translate from '~/translations';
 
 import Home from '~/screens/Home';
@@ -60,38 +61,40 @@ function MainStackScreen() {
 const App = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <RootStack.Navigator
-          screenOptions={{
-            headerShown: false,
-            cardStyle: { backgroundColor: 'transparent' },
-            cardOverlayEnabled: true,
-            cardStyleInterpolator: ({ current: { progress } }) => ({
-              cardStyle: {
-                opacity: progress.interpolate({
-                  inputRange: [0, 0.5, 0.9, 1],
-                  outputRange: [0, 0.25, 0.7, 1],
-                }),
-              },
-              overlayStyle: {
-                opacity: progress.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 0.5],
-                  extrapolate: 'clamp',
-                }),
-              },
-            }),
-          }}
-          mode="modal">
-          <RootStack.Screen
-            name="Main"
-            component={MainStackScreen}
-            options={{ headerShown: false }}
-          />
-          <RootStack.Screen name="InputModal" component={InputModal} />
-          <RootStack.Screen name="MessageModal" component={MessageModal} />
-        </RootStack.Navigator>
-      </NavigationContainer>
+      <PaperProvider>
+        <NavigationContainer>
+          <RootStack.Navigator
+            screenOptions={{
+              headerShown: false,
+              cardStyle: { backgroundColor: 'transparent' },
+              cardOverlayEnabled: true,
+              cardStyleInterpolator: ({ current: { progress } }) => ({
+                cardStyle: {
+                  opacity: progress.interpolate({
+                    inputRange: [0, 0.5, 0.9, 1],
+                    outputRange: [0, 0.25, 0.7, 1],
+                  }),
+                },
+                overlayStyle: {
+                  opacity: progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 0.5],
+                    extrapolate: 'clamp',
+                  }),
+                },
+              }),
+            }}
+            mode="modal">
+            <RootStack.Screen
+              name="Main"
+              component={MainStackScreen}
+              options={{ headerShown: false }}
+            />
+            <RootStack.Screen name="InputModal" component={InputModal} />
+            <RootStack.Screen name="MessageModal" component={MessageModal} />
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
     </Provider>
   );
 };
