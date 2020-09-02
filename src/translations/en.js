@@ -29,4 +29,5 @@ export default {
     'Are you sure you want to delete this item? Deleted items cannot be recovered!',
   yes: 'YES',
   attention: 'Attention!',
+  informations: 'Informations',
 };

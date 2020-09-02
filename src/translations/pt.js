@@ -30,4 +30,5 @@ export default {
     'Tem certeza que deseja deletar este item? Itens deletados não poderão ser recuperados!',
   yes: 'SIM',
   attention: 'Atenção!',
+  informations: 'Informações',
 };
