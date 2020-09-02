@@ -9,7 +9,7 @@ export default {
   description: 'Descrição',
   location: 'Local',
   createdAt: 'Criado em',
-  updateAt: 'Modificado em',
+  updatedAt: 'Modificado em',
   saveChangesQuestion: 'Gostaria de salvar as alterações?',
   saveItemBody:
     'Ao clicar em salvar, um novo item será adicionado a sua gaveta',

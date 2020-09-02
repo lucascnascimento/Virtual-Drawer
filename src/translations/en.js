@@ -9,7 +9,7 @@ export default {
   description: 'Description',
   location: 'Location',
   createdAt: 'Created at',
-  updateAt: 'Updated at',
+  updatedAt: 'Updated at',
   saveChangesQuestion: 'Do you want to save the changes?',
   saveItemBody: 'By clicking on save a new item will be added to your drawer',
   saveDrawerBody: 'By clicking on save a new drawer will be created',
