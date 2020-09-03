@@ -93,8 +93,8 @@ const Search: React.FC<SearchProps> = (props: SearchProps) => {
     navigation.navigate('MessageModal', {
       title: translate('attention'),
       message: translate('deleteItemBody'),
-      leftButtonLable: translate('cancel'),
-      rightButtonLable: translate('yes'),
+      leftButtonLable: translate('capitalCancel'),
+      rightButtonLable: translate('capitalYes'),
       leftButtonHandler,
       rightButtonHandler: deleteFromList,
       item: name,

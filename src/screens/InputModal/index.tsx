@@ -78,7 +78,7 @@ const InputModal: React.FC<InputModalProps> = ({
             onPress={() => {
               navigation.goBack();
             }}>
-            <Text>{translate('cancel')}</Text>
+            <Text>{translate('capitalCancel')}</Text>
           </Button>
           <Button
             onPress={() => {
@@ -86,7 +86,7 @@ const InputModal: React.FC<InputModalProps> = ({
             }}
             disabled={inputError}
             style={inputError && { opacity: 0.5 }}>
-            <Text>{translate('create')}</Text>
+            <Text>{translate('capitalCreate')}</Text>
           </Button>
         </Footer>
       </ModalView>
