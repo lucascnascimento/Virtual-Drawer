@@ -36,5 +36,6 @@ export default {
   ok: 'Ok',
   cancel: 'Cancel',
   error: 'Erro',
-  cameraMessageError: 'Houve um erro ao tirar a foto',
+  cameraMessageError: 'Ocorreu um erro ao tirar a foto',
+  cameraAcess: 'Sem acesso a câmera',
 };
