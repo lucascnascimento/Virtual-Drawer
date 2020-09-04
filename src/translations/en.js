@@ -37,4 +37,8 @@ export default {
   error: 'Error',
   cameraMessageError: 'There was an error taking the photo',
   cameraAcess: 'No access to camera',
+  readStorageTitle: 'Acess storage',
+  readStorageMessage: 'Acess storage for the pictures',
+  writeStorageTitle: 'Acess storage',
+  writeStorageMessage: 'Acess storage for saving pictures',
 };

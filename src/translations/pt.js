@@ -38,4 +38,8 @@ export default {
   error: 'Erro',
   cameraMessageError: 'Ocorreu um erro ao tirar a foto',
   cameraAcess: 'Sem acesso a câmera',
+  readStorageTitle: 'Acessar o armazenamento',
+  readStorageMessage: 'Acessar o armazenamento para fotos',
+  writeStorageTitle: 'Acessar o armazenamento',
+  writeStorageMessage: 'Acessar o armazenamento para salvar fotos',
 };
