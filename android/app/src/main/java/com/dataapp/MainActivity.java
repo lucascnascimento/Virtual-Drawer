@@ -1,6 +1,7 @@
 package com.dataapp;
 
 import com.facebook.react.ReactActivity;
+import com.rnfs.RNFSPackage;  // <--- import
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +13,12 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "dataApp";
   }
+
+   @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+        new MainReactPackage(), // <---- add comma
+        new RNFSPackage() // <---------- add package
+      );
+    }
 }
