@@ -23,7 +23,7 @@ Home screen where your drawers are listed:
   <img  alt="Home"  src="./github/Screenshot_2020-09-08-22-00-46.png"  width="15%">
 </p>
 
-Modal Screen to create a new drawer:
+Modal Screen to create a new drawer
 
 <p  align="center">
   <img  alt="Home"  src="./github/Screenshot_2020-09-08-22-00-43.png"  width="15%">
