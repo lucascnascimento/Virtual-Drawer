@@ -1,9 +1,12 @@
-import { Alert } from 'react-native';
+import { Alert, PermissionsAndroid } from 'react-native';
 import {
   openDatabase,
   ResultSet,
   SQLiteDatabase,
 } from 'react-native-sqlite-storage';
+import RNFS from 'react-native-fs';
+
+import { permitWriteExternalStorage } from '~/utils/androidPermissions';
 
 import { Item } from '~/types/types';
 
@@ -19,6 +22,30 @@ const db: SQLiteDatabase = openDatabase(
     Alert.alert(`Falha ao conectar ao banco!`, `Erro: ${error}`);
   },
 );
+
+const appFolderPath = `/storage/emulated/0/DataApp/Pictures`;
+
+/**
+ * Create the app folder to store database pictures
+ */
+async function createPicturesBaseFolder() {
+  try {
+    const granted = await permitWriteExternalStorage();
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      RNFS.mkdir(appFolderPath);
+    } else {
+      console.log('Permission denied');
+    }
+  } catch (error) {
+    console.log('creation error: ', error);
+  }
+}
+
+createPicturesBaseFolder();
+
+async function createTablePicturesFolder(name: string) {
+  await RNFS.mkdir(`${appFolderPath}/${name}`);
+}
 
 /**
  * Executes an sql query on the database
@@ -175,6 +202,7 @@ function selectRow(tableName: string, id: number): Promise<ResultSet> {
 export default {
   indexTables,
   createTable,
+  createTablePicturesFolder,
   dropTable,
   selectTable,
   selectAllRows,
