@@ -32,7 +32,13 @@ export type MainStackParamList = {
   TableItems: {
     tableName: string;
   };
-  AddItem: undefined;
+  AddItem: {
+    picturePath: string;
+    pictureSrcFolder?: string;
+  };
+  Camera: {
+    pictureSrcFolder: string;
+  };
 };
 
 //! @MainStack Home Screen
@@ -94,6 +100,19 @@ export type AddItemProps = {
   navigation: AddItemScreenNavigationProp;
 };
 
+//! @MainStack Camera
+type CameraScreenRouteProp = RouteProp<MainStackParamList, 'Camera'>;
+
+type CameraScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<MainStackParamList, 'Camera'>,
+  StackNavigationProp<RootStackParamList>
+>;
+
+export type CameraProps = {
+  route: CameraScreenRouteProp;
+  navigation: CameraScreenNavigationProp;
+};
+
 //! RootStack
 export type RootStackParamList = {
   Main: undefined;
@@ -147,7 +166,7 @@ export type InputModalProps = {
 // #region Styled-components
 
 export interface TouchableOpacityProps {
-  onPress: (event: GestureResponderEvent) => void | undefined;
+  onPress: (event: GestureResponderEvent) => void | undefined | Promise<void>;
 }
 
 // #endregion
