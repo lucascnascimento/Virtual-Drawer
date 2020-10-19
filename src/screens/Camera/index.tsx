@@ -8,16 +8,9 @@ import {
   ImageBackground,
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { ActivityIndicator } from 'react-native-paper';
 import MCIIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import RNFetchBlob from 'rn-fetch-blob';
 import translate from '~/translations';
-import {
-  permitReadExternalStorage,
-  permitWriteExternalStorage,
-  permitCamera,
-} from '~/utils/androidPermissions';
-
+import { permitCamera } from '~/utils/androidPermissions';
 import { CameraProps } from '~/types/types';
 
 import {
@@ -40,11 +33,10 @@ const Camera: React.FC<CameraProps> = (props: CameraProps) => {
   const { navigation, route } = props;
 
   const isFocused = useIsFocused();
-  const [loading, setLoading] = useState(false);
   const [camera, setCamera] = useState<RNCamera | null>();
   const [flash, setFlash] = useState(false);
   const [permission, setPermission] = useState(false);
-  const [imageUri, setImageUri] = useState<string | undefined>(undefined);
+  const [imageUri, setImageUri] = useState<string>('');
   const [visibleToast, setVisibleToast] = useState(false);
 
   // Checks if the user is allowed to use the camera
@@ -60,43 +52,16 @@ const Camera: React.FC<CameraProps> = (props: CameraProps) => {
     getPermission();
   }, []);
 
-  useEffect(() => {
-    setLoading(false);
-  }, [imageUri]);
-
   // Toggles flash on and off
   function handleFlash() {
     setFlash(!flash);
   }
 
-  // TODO: Add permission to android 6.0
+  // Submits the picture
   async function submitPicture() {
-    try {
-      // Check Permissions
-      const grantedRead = await permitReadExternalStorage();
-      const grantedWrite = await permitWriteExternalStorage();
-
-      if (grantedRead && grantedWrite === PermissionsAndroid.RESULTS.GRANTED) {
-        const uri = imageUri!.split('//')[1];
-        const imageName = imageUri?.split('/').pop();
-
-        const finalDestination = `/storage/emulated/0/DataApp/Pictures/${route.params.pictureSrcFolder}/${imageName}`;
-
-        await RNFetchBlob.fs.mv(
-          // Moves the picture from the cache folder to final destination
-          uri,
-          finalDestination,
-        );
-
-        navigation.navigate('AddItem', {
-          picturePath: `file://${finalDestination}`,
-        });
-      } else {
-        setVisibleToast(true);
-      }
-    } catch (error) {
-      Alert.alert(translate('error'), translate('snapshotSaveError'));
-    }
+    navigation.navigate('AddItem', {
+      picturePath: imageUri,
+    });
   }
 
   // Takes a picture
@@ -107,7 +72,13 @@ const Camera: React.FC<CameraProps> = (props: CameraProps) => {
         forceUpOrientation: true,
         fixOrientation: true,
       });
-      setLoading(true);
+
+      if (data?.uri) {
+        setImageUri(data.uri);
+      } else {
+        throw new Error();
+      }
+
       setImageUri(data?.uri);
     } catch (error) {
       Alert.alert(translate('error'), translate('cameraMessageError'));
@@ -163,7 +134,7 @@ const Camera: React.FC<CameraProps> = (props: CameraProps) => {
           <ImageBackground style={{ flex: 1 }} source={{ uri: imageUri }} />
 
           <PreviewButtonContainer>
-            <CloseButton onPress={() => setImageUri(undefined)}>
+            <CloseButton onPress={() => setImageUri('')}>
               <MCIIcons name="close" size={32} color="#fff" />
             </CloseButton>
             <CheckButton onPress={submitPicture}>
@@ -195,13 +166,6 @@ const Camera: React.FC<CameraProps> = (props: CameraProps) => {
     }
     if (!isFocused) {
       return <View />;
-    }
-    if (loading) {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <ActivityIndicator />
-        </View>
-      );
     }
 
     return cameraView();
