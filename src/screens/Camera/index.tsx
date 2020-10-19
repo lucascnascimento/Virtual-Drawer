@@ -30,7 +30,7 @@ import Toast from '~/components/Toast';
  * Opens the camera
  */
 const Camera: React.FC<CameraProps> = (props: CameraProps) => {
-  const { navigation, route } = props;
+  const { navigation } = props;
 
   const isFocused = useIsFocused();
   const [camera, setCamera] = useState<RNCamera | null>();

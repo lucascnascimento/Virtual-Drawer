@@ -36,9 +36,7 @@ export type MainStackParamList = {
     picturePath: string;
     pictureSrcFolder?: string;
   };
-  Camera: {
-    pictureSrcFolder: string;
-  };
+  Camera: undefined;
 };
 
 //! @MainStack Home Screen
