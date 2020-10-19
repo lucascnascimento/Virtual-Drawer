@@ -42,4 +42,6 @@ export default {
   readStorageMessage: 'Acessar o armazenamento para fotos',
   writeStorageTitle: 'Acessar o armazenamento',
   writeStorageMessage: 'Acessar o armazenamento para salvar fotos',
+  snapshotSaveError: 'Ocorreu um erro ao salvar a foto',
+  permissionsDenied: 'Permissões negadas',
 };
