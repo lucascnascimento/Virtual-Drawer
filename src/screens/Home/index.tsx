@@ -79,6 +79,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
     async function handleAddAction(inputText: string) {
       try {
         const res = await db.createTable(inputText);
+        await db.createTablePicturesFolder(inputText);
         const { rows } = res;
         for (let i = 0; i < rows.length; i++) {
           const item = rows.item(i);
