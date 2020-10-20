@@ -12,6 +12,13 @@ export interface Item {
   updatedAt?: string;
 }
 
+export interface ItemErrors {
+  name: boolean;
+  description?: boolean;
+  location?: boolean;
+  pictureSrc?: boolean;
+}
+
 export interface TablesList {
   tables: string[];
 }
