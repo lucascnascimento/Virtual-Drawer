@@ -32,7 +32,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
     const { rows } = res;
     const itemArray: TableName[] = [];
     for (let i = 0; i < rows.length; i++) {
-      itemArray.push(rows.item(i));
+      itemArray.push({ id: i, name: rows.item(i).name });
     }
     setList(itemArray);
     setLoading(false);

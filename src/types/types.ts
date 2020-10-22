@@ -25,6 +25,7 @@ export interface TablesList {
 
 export interface TableName {
   name: string;
+  id: number;
 }
 
 // #region Navigator and Screen types

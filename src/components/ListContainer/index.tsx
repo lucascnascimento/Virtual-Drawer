@@ -4,10 +4,10 @@ import { FlatList } from 'react-native-gesture-handler';
 
 import { Separator } from './styles';
 
-import { TableName } from '~/types/types';
+import { Item, TableName } from '~/types/types';
 
 type ListContainerProps = {
-  list: Array<TableName>;
+  list: Array<TableName> | Array<Item>;
   loading: boolean;
   renderItem: ({ item }: { item: TableName }) => JSX.Element;
   children: React.ReactElement;
@@ -32,7 +32,7 @@ const ListContainer: React.FC<ListContainerProps> = (
       ) : (
         <FlatList
           data={list}
-          keyExtractor={(listItem) => listItem.name}
+          keyExtractor={(listItem) => listItem.id.toString()}
           renderItem={renderItem}
           ItemSeparatorComponent={() => <Separator />}
         />
