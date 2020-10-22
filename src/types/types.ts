@@ -45,6 +45,7 @@ export type MainStackParamList = {
     pictureSrcFolder?: string;
   };
   Camera: undefined;
+  SearchItemScreen: undefined;
 };
 
 //! @MainStack Home Screen
@@ -117,6 +118,16 @@ type CameraScreenNavigationProp = CompositeNavigationProp<
 export type CameraProps = {
   route: CameraScreenRouteProp;
   navigation: CameraScreenNavigationProp;
+};
+
+//! @MainStack SearchItemScreen
+type SearchItemScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<MainStackParamList, 'SearchItemScreen'>,
+  StackNavigationProp<RootStackParamList>
+>;
+
+export type SearchItemScreenProps = {
+  navigation: SearchItemScreenNavigationProp;
 };
 
 //! RootStack

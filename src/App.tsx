@@ -13,6 +13,7 @@ import Options from '~/screens/Options';
 import TableItems from '~/screens/TableItems';
 import AddItem from '~/screens/AddItem';
 import Camera from '~/screens/Camera';
+import SearchItemScreen from '~/screens/SearchItem';
 import InputModal from '~/screens/InputModal';
 import MessageModal from '~/screens/MessageModal';
 
@@ -59,6 +60,13 @@ function MainStackScreen() {
         name="Camera"
         component={Camera}
         options={{ headerShown: false }}
+      />
+      <MainStack.Screen
+        name="SearchItemScreen"
+        component={SearchItemScreen}
+        options={{
+          headerShown: false,
+        }}
       />
     </MainStack.Navigator>
   );

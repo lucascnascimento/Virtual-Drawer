@@ -68,7 +68,7 @@ const TableItemsScreen: React.FC<TableItemsProps> = (
         <HeaderRightIcons
           leftSideButton={() => (
             <SearchButton
-              searchButtonAction={() => navigation.navigate('SearchTable')}
+              searchButtonAction={() => navigation.navigate('SearchItemScreen')}
             />
           )}
           rightSideButton={() => (
