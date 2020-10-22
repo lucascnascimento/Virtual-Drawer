@@ -89,7 +89,7 @@ type TableItemsScreenNavigationProp = CompositeNavigationProp<
   StackNavigationProp<RootStackParamList>
 >;
 
-export type TableItemsProps = {
+export type TableItemsScreenProps = {
   route: TableItemsScreenRouteProp;
   navigation: TableItemsScreenNavigationProp;
 };

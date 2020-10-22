@@ -8,13 +8,13 @@ import AddButton from '~/components/AddButton';
 import HeaderRightIcons from '~/components/HeaderRightIcons';
 import SearchButton from '~/components/SearchButton';
 
-import { Item, TableItemsProps } from '~/types/types';
+import { Item, TableItemsScreenProps } from '~/types/types';
 import ListContainer from '~/components/ListContainer';
 import Toast from '~/components/Toast';
 import ListItem from '~/components/ListItem';
 
-const TableItemsScreen: React.FC<TableItemsProps> = (
-  props: TableItemsProps,
+const TableItemsScreen: React.FC<TableItemsScreenProps> = (
+  props: TableItemsScreenProps,
 ) => {
   const { route } = props;
 
