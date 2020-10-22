@@ -41,7 +41,8 @@ const AddItem: React.FC<AddItemProps> = (props: AddItemProps) => {
     // Handle form submit
     async function handleSubmit() {
       if (validateInfo()) {
-        const res = await db.insertRow(route.params.pictureSrcFolder!, item);
+        await db.insertRow(route.params.pictureSrcFolder!, item);
+        navigation.navigate('TableItems');
       }
     }
 
