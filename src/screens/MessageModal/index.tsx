@@ -45,7 +45,7 @@ const MessageModal: React.FC<MessageModalProps> = ({
             <Text>{route.params.leftButtonLable}</Text>
           </Button>
           <Button
-            onPress={() => route.params.rightButtonHandler(route.params.item)}>
+            onPress={() => route.params.rightButtonHandler(route.params.id)}>
             <Text>{route.params.rightButtonLable}</Text>
           </Button>
         </Footer>

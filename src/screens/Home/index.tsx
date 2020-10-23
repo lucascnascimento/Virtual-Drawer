@@ -42,13 +42,20 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
    * Deletes an item from the list.
    * @param name Name of the item to be deleted from the list.
    */
-  async function deleteFromList(name: string) {
+  async function deleteFromList(id: number) {
     try {
-      const res = await db.dropTable(name);
-      const newList = list.filter((item) => item.name !== name);
-      setList(newList);
-      navigation.navigate('Home');
-      setVisibleToast(true);
+      const itemToBeDeleted = list.find((item) => item.id === id);
+      if (itemToBeDeleted) {
+        await db.dropTable(itemToBeDeleted.name);
+        const newList = list.filter(
+          (item) => item.name !== itemToBeDeleted.name,
+        );
+        setList(newList);
+        navigation.navigate('Home');
+        setVisibleToast(true);
+      } else {
+        throw new Error('Error');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +127,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
    * Action to be performed by the ListItem's trash button
    * @param name Name of the item to be deleted
    */
-  function trashButtonAction(name: string) {
+  function trashButtonAction(id: number) {
     navigation.navigate('MessageModal', {
       title: translate('attention'),
       message: translate('deleteItemBody'),
@@ -128,7 +135,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
       rightButtonLable: translate('capitalYes'),
       leftButtonHandler,
       rightButtonHandler: deleteFromList,
-      item: name,
+      id,
     });
   }
 

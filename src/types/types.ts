@@ -142,10 +142,8 @@ export type RootStackParamList = {
     leftButtonLable: string;
     rightButtonLable: string;
     leftButtonHandler: () => void;
-    rightButtonHandler:
-      | ((name: string) => Promise<void>)
-      | (() => Promise<void>);
-    item: string;
+    rightButtonHandler: ((id: number) => Promise<void>) | (() => Promise<void>);
+    id: number;
   };
 };
 
