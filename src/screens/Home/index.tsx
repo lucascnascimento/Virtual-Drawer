@@ -10,6 +10,7 @@ import HeaderRightIcons from '~/components/HeaderRightIcons';
 import SearchButton from '~/components/SearchButton';
 import AddButton from '~/components/AddButton';
 import Toast from '~/components/Toast';
+import { DrawerIcon } from '~/components/ListItemSideIcon';
 
 import db from '~/database/db';
 
@@ -149,6 +150,7 @@ const Home: React.FC<HomeProps> = ({ route }: HomeProps) => {
             item={item}
             trashButtonAction={trashButtonAction}
             navigateTo="TableItems"
+            icon={<DrawerIcon />}
           />
         )}>
         <Toast visible={visibleToast} message={translate('drawerDeleted')} />
