@@ -9,7 +9,7 @@ import { Container, Body, BodyTitle, TrashButton } from './styles';
 
 type ListItemProps = {
   item: TableName | Item;
-  trashButtonAction: (name?: string, id?: number) => void;
+  trashButtonAction: (id: number) => void;
   navigateTo: string;
   icon: React.ReactNode;
 };
@@ -30,7 +30,7 @@ const ListItem: React.FC<ListItemProps> = (props: ListItemProps) => {
    */
   function renderRightAction() {
     return (
-      <TrashButton onPress={() => trashButtonAction(item.name, item.id)}>
+      <TrashButton onPress={() => trashButtonAction(item.id)}>
         <SLIcon name="trash" size={24} color="#fff" />
       </TrashButton>
     );

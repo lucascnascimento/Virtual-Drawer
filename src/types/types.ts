@@ -3,7 +3,7 @@ import { RouteProp, CompositeNavigationProp } from '@react-navigation/native';
 import { GestureResponderEvent } from 'react-native';
 
 export interface Item {
-  id?: number;
+  id: number;
   name: string;
   description?: string;
   location?: string;
